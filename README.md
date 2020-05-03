@@ -15,10 +15,9 @@ You will also need the bracket to connect the load cell to your printer: https:/
 Install via the bundled [Plugin Manager](https://github.com/foosel/OctoPrint/wiki/Plugin:-Plugin-Manager)
 or manually using this URL:
 
-    https://github.com/dieki-n/OctoPrint-Filament-scale/archive/master.zip
+    https://github.com/Lampi85/OctoPrint-Filament-scale/archive/master.zip
 
 
 ## Configuration
 
 Once you have wired up the HX711, it must be calibrated. This is a pretty straightforward process, and all you will need is an object of known weight. Attach the load cell to your printer with the printed bracket, then follow the instructions on the plugin's settings page.
-
