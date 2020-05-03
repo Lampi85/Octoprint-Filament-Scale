@@ -19,16 +19,16 @@ class Filament_scalePlugin(octoprint.plugin.SettingsPlugin,
 		return [
 			dict(type="settings", custom_bindings=True)
 		]
-	
+
 	def get_settings_defaults(self):
 		return dict(
 			tare = 8430152,
 			reference_unit=-411,
 			spool_weight=200,
-			clockpin=21,
-			datapin=20,
+			clockpin=29,
+			datapin=28,
 			lastknownweight=0
-			
+
 			# put your plugin's default settings here
 		)
 
@@ -43,21 +43,21 @@ class Filament_scalePlugin(octoprint.plugin.SettingsPlugin,
 			less=["less/filament_scale.less"]
 		)
 
-	
+
 	def on_startup(self, host, port):
 		self.hx = HX711(20, 21)
-		self.hx.set_reading_format("LSB", "MSB") 
+		self.hx.set_reading_format("LSB", "MSB")
 		self.hx.reset()
 		self.hx.power_up()
 		self.t = octoprint.util.RepeatedTimer(3.0, self.check_weight)
 		self.t.start()
-		
+
 	def check_weight(self):
 		self.hx.power_up()
 		v = self.hx.read()
-		self._plugin_manager.send_plugin_message(self._identifier, v) 
+		self._plugin_manager.send_plugin_message(self._identifier, v)
 		self.hx.power_down()
-		
+
 	def get_update_information(self):
 		# Define the configuration for your plugin to use with the Software Update
 		# Plugin here. See https://github.com/foosel/OctoPrint/wiki/Plugin:-Software-Update
@@ -92,4 +92,3 @@ def __plugin_load__():
 	__plugin_hooks__ = {
 		"octoprint.plugin5.softwareupdate.check_config": __plugin_implementation__.get_update_information
 	}
-
